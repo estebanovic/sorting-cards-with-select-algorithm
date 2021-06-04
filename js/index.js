@@ -79,10 +79,10 @@ function printCards(num, suit, obj) {
     obj.appendChild(col);
 }
 
-function removeOldSorts(){
+function removeOldSorts() {
     if (document.getElementsByClassName("newRow").length != 0) {
         var newRows = document.getElementsByClassName("newRow");
-        for(let i = document.getElementsByClassName("newRow").length-1; i >= 0; i--){
+        for (let i = document.getElementsByClassName("newRow").length - 1; i >= 0; i--) {
             container.removeChild(newRows[i])
         }
     }
@@ -94,7 +94,7 @@ drawButton.onclick = function draw() {
     firstRow = document.getElementById("first-row");
     firstRow.innerHTML = "";
     cards = [];
-    
+
     removeOldSorts();
 
     for (let i = 0; i < document.getElementById("amount").value; i++) {
@@ -120,15 +120,13 @@ sortButton.onclick = function sort() {
     subTitleRow.appendChild(subTitle);
     container.appendChild(subTitleRow);
 
-    for (let wall = cards.length - 1; wall > 0; wall--) {
-        for (let index = 0; index < wall; index++) {
-            console.log(cards[index].value);
-            if (parseInt(cards[index].value) > parseInt(cards[index + 1].value)) {
-                console.log(cards[index].value + " " + cards[index + 1].value);
-                let aux = cards[index].value;
-                cards[index].value = cards[index + 1].value;
-                cards[index + 1].value = aux;
-            }
+    for (let i = 0; i < cards.length - 1; i++) {
+        for (let j = i; j < cards.length; j++) {
+           if(cards[j].value < cards[i].value){
+            let aux = cards[j];
+            cards[j] = cards[i];
+            cards[i] = aux;
+           }
         }
         let newRow = document.createElement('div');
         newRow.className = 'row m-2 newRow';
